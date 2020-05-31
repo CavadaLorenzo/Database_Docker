@@ -1,0 +1,6 @@
+FROM python
+RUN mkdir dao
+WORKDIR /dao
+COPY ./DAO/dao /dao/
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+CMD ["python", "main.py"]

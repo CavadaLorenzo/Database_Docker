@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+    init-influxdb.sh:
+        container_name: influxDB
+        image: influxdb
+        environment:
+            - INFLUXDB_DB=db0
+            - INFLUXDB_ADMIN_USER=admin
+            - INFLUXDB_ADMIN_PASSWORD=admin
+        volumes:
+            - 'influxdb:/var/lib/influxdb'
+        ports:
+            - '8089:8086'
+    postgres-db:
+        container_name: postgres-db
+        build:
+            context: ./
+            dockerfile: Postgres/PostgresDockerfile
+        ports:
+           - 54320:5432
+    dao:
+        container_name: dao
+        build:
+            context: ./
+            dockerfile: DAO/DAODockerfile
+        environment:
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_IP=192.168.1.188
+            - POSTGRES_PORT=54320
+            - POSTGRES_DB_NAME=servers
+            - PYTHONUNBUFFERED=1
+        ports:
+            - 4327:5000
+        depends_on:
+            - postgres-db
+volumes:
+    influxdb:
