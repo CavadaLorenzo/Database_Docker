@@ -46,6 +46,8 @@ class Servers(SAFRSBase, db.Model):
     server_ssh_port = db.Column(db.String, nullable=False)
     __table_args__ = (db.UniqueConstraint('server_ip', 'server_port'), )
 
+    
+
     # Following method is exposed through the REST API
     # This means it can be invoked with a HTTP POST
     """
@@ -62,6 +64,19 @@ class Servers(SAFRSBase, db.Model):
         return {"result": args}
     """
 
+class Uploads(SAFRSBase, db.Model):
+    """
+        description: The server object represent a real FTP server running somewhere. Each FTP server has an unique ID and a server_name.
+    """
+
+    __tablename__ = "File_list"
+    id = db.Column(db.String, primary_key=True)
+    server_id = db.Column(db.String, nullable=False, unique=True)
+    filename = db.Column(db.String, nullable=False)
+    upload_date = db.Column(db.String, nullable=False)
+
+
+    
 
 
 def start_api(swagger_host="0.0.0.0", PORT=None):
@@ -87,6 +102,7 @@ def start_api(swagger_host="0.0.0.0", PORT=None):
         )
 
         api.expose_object(Servers)
+        api.expose_object(Uploads)
 
 API_PREFIX = "/api"  # swagger location
 app = Flask("Server Info")

@@ -26,7 +26,7 @@ services:
         environment:
             - POSTGRES_USER=admin
             - POSTGRES_PASSWORD=admin
-            - POSTGRES_IP=192.168.1.188
+            - POSTGRES_IP=192.168.1.190
             - POSTGRES_PORT=54320
             - POSTGRES_DB_NAME=servers
             - PYTHONUNBUFFERED=1
