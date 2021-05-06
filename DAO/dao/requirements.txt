@@ -2,7 +2,7 @@ aniso8601==8.0.0
 attrs==19.3.0
 click==7.1.2
 Flask==1.1.2
-Flask-Cors==3.0.7
+Flask-Cors==3.0.9
 Flask-RESTful==0.3.8
 flask-restful-swagger-2==0.35
 Flask-SQLAlchemy==2.3.2
